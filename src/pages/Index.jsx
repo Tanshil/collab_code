@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { AuthPage } from "@/components/AuthPage.jsx";
 import { Dashboard } from "@/components/Dashboard.jsx";
 import { RoomEditor } from "@/components/RoomEditor.jsx";
+import { HomePage } from "./HomePage.jsx";
 
 const Index = () => {
-  const [appState, setAppState] = useState('auth');
+  const [appState, setAppState] = useState('homepage'); // Start with homepage
   const [user, setUser] = useState(null);
   const [currentRoomId, setCurrentRoomId] = useState("");
+
+  const handleNavigateToAuth = () => {
+    setAppState('auth');
+  };
 
   const handleAuthSuccess = (userData) => {
     setUser(userData);
@@ -31,14 +36,27 @@ const Index = () => {
 
   const handleLogout = () => {
     setUser(null);
-    setAppState('auth');
+    setAppState('homepage'); // Go back to homepage after logout
     setCurrentRoomId("");
   };
 
-  if (appState === 'auth') {
-    return <AuthPage onAuthSuccess={handleAuthSuccess} />;
+  const handleBackToHome = () => {
+    setAppState('homepage');
+    setUser(null);
+    setCurrentRoomId("");
+  };
+
+  // Render homepage
+  if (appState === 'homepage') {
+    return <HomePage onNavigateToAuth={handleNavigateToAuth} />;
   }
 
+  // Render authentication page
+  if (appState === 'auth') {
+    return <AuthPage onAuthSuccess={handleAuthSuccess} onBackToHome={handleBackToHome} />;
+  }
+
+  // Render dashboard
   if (appState === 'dashboard' && user) {
     return (
       <Dashboard
@@ -50,6 +68,7 @@ const Index = () => {
     );
   }
 
+  // Render room editor
   if (appState === 'room' && user && currentRoomId) {
     return (
       <RoomEditor

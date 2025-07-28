@@ -4,8 +4,9 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft } from "lucide-react";
 
-export const AuthPage = ({ onAuthSuccess }) => {
+export const AuthPage = ({ onAuthSuccess, onBackToHome }) => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -61,6 +62,18 @@ export const AuthPage = ({ onAuthSuccess }) => {
   return (
     <div className="min-h-screen bg-gradient-dark flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        {/* Back Button */}
+        <div className="mb-6">
+          <Button 
+            variant="ghost" 
+            onClick={onBackToHome}
+            className="flex items-center space-x-2 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to Home</span>
+          </Button>
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2">
             CollabCode
@@ -99,7 +112,7 @@ export const AuthPage = ({ onAuthSuccess }) => {
                   />
                 </div>
               )}
-              
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -113,14 +126,14 @@ export const AuthPage = ({ onAuthSuccess }) => {
                   className="bg-input border-border"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleInputChange}
                   required
@@ -131,24 +144,30 @@ export const AuthPage = ({ onAuthSuccess }) => {
               <Button 
                 type="submit" 
                 className="w-full" 
-                size="lg"
                 disabled={isLoading}
               >
-                {isLoading ? "Processing..." : (isLogin ? "Sign In" : "Create Account")}
+                {isLoading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="w-4 h-4 border-2 border-primary-foreground border-t-transparent rounded-full animate-spin"></div>
+                    <span>Loading...</span>
+                  </div>
+                ) : (
+                  isLogin ? "Sign In" : "Create Account"
+                )}
               </Button>
             </form>
 
             <div className="mt-6 text-center">
-              <button
-                type="button"
-                onClick={() => setIsLogin(!isLogin)}
-                className="text-sm text-primary hover:underline transition-colors"
-              >
-                {isLogin 
-                  ? "Don't have an account? Sign up" 
-                  : "Already have an account? Sign in"
-                }
-              </button>
+              <p className="text-sm text-muted-foreground">
+                {isLogin ? "Don't have an account? " : "Already have an account? "}
+                <button
+                  type="button"
+                  onClick={() => setIsLogin(!isLogin)}
+                  className="text-primary hover:underline font-medium"
+                >
+                  {isLogin ? "Sign up" : "Sign in"}
+                </button>
+              </p>
             </div>
           </CardContent>
         </Card>
