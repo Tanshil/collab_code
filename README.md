@@ -1,4 +1,4 @@
-I can help you format your CollabCode project description into a clean and well-aligned README. Here's how it looks:
+
 
 CollabCode - Real-time Collaborative Coding Platform
 A modern, real-time collaborative coding platform built with React, Vite, and shadcn/ui.
