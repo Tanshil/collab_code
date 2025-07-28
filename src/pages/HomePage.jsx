@@ -48,13 +48,13 @@ export const HomePage = ({ onNavigateToAuth }) => {
       text: "CollabCode has transformed how our team works. Real-time collaboration makes pair programming effortless."
     },
     {
-      name: "Marcus Rodriguez",
+      name: "Vibhav Singh",
       role: "Tech Lead",
       avatar: "👨‍💻",
       text: "The best collaborative coding platform I've used. Clean interface and powerful features."
     },
     {
-      name: "Emily Watson",
+      name: "Adarsh Chaudhary",
       role: "Software Engineer",
       avatar: "👩‍💻",
       text: "Perfect for remote teams. We use it daily for code reviews and pair programming sessions."
@@ -198,7 +198,7 @@ export const HomePage = ({ onNavigateToAuth }) => {
               <span className="text-lg font-semibold">CollabCode</span>
             </div>
             <div className="text-sm text-muted-foreground">
-              © 2024 CollabCode. Built with ❤️ for developers.
+              © 2025 CollabCode. Built with ❤️ for developers by Tanshil.
             </div>
           </div>
         </div>
